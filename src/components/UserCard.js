@@ -9,6 +9,7 @@ const CardContainer = styled.div`
   border-radius: 10px;
   padding: .5em;
   postion: relative;
+  margin: 10px;
 `
 const ProfileInfo = styled.div`
   font-size: .9em;
