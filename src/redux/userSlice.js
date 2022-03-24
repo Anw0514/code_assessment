@@ -25,10 +25,12 @@ export const userSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     selectUser: (state, action) => {
-      state.selectedUserIds.push(action.payload);
+      if (!state.selectedUserIds.includes(action.payload)) {
+        state.selectedUserIds.push(action.payload);
+      }
     },
     deselectUser: (state, action) => {
-      state.selectedUserIds.filter(id => id !== action.payload);
+      state.selectedUserIds = state.selectedUserIds.filter(id => id !== action.payload);
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
