@@ -15,7 +15,7 @@ export const fetchUsers = createAsyncThunk(
   'users/fetchCount',
   async () => {
     return fetch("https://immense-bastion-95145.herokuapp.com/api/users")
-      .then(res => res.json());
+      .then(res => res.json()).then(r => r.users);
   }
 );
 
@@ -40,11 +40,11 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users += action.payload;
+        state.users = action.payload;
       });
   },
 });
 
-export const { increment, decrement, incrementByAmount, selectUser, deselectUser } = userSlice.actions;
-
+export const { selectUser, deselectUser } = userSlice.actions;
+export const selectedUsersSelector = (state => state.user.selectedUserIds.map(id => state.user.users.find(u => u.id === id)))
 export default userSlice.reducer;
